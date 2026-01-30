@@ -68,3 +68,20 @@ make dev
 
 - Job data is stored in-memory for dev; the job store is isolated so it can be swapped to Redis later.
 - Uploaded files and outputs are stored under `/tmp/ppt-knowledge-doc/{jobId}` by default.
+
+## OpenClaw skill (optional)
+
+This repo also includes an OpenClaw skill at `skills/ppt-knowledge-doc/`.
+
+**Install (manual):**
+1. Copy `skills/ppt-knowledge-doc` into your OpenClaw skills folder (commonly `~/.openclaw/skills/`)
+2. Restart the OpenClaw gateway
+
+**Package for sharing:**
+```bash
+python3 /usr/local/lib/node_modules/clawdbot/skills/skill-creator/scripts/package_skill.py \
+  skills/ppt-knowledge-doc dist
+# produces: dist/ppt-knowledge-doc.skill
+```
+
+Anyone can then install by dropping the `.skill` file into their OpenClaw/skills install flow (or unpacking it into their skills directory).
