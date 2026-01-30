@@ -1,0 +1,28 @@
+Scaffold an MVP web app named 'ppt-knowledge-doc'.
+
+Goal: User drags & drops a .pptx. Backend extracts slide text and images, runs OCR on images, and generates a structured 'knowledge document' JSON plus a downloadable Markdown file.
+
+Tech choices:
+- Frontend: Next.js (TypeScript) with a drag-and-drop upload component, progress UI, and results display. Provide a Download Markdown button.
+- Backend: Python FastAPI.
+- PPT parsing: python-pptx. Extract per-slide text, speaker notes, and images (save to a temp job folder).
+- OCR: use pytesseract for now (document that macOS will need tesseract installed; include a fallback that skips OCR if not available).
+
+API:
+- POST /api/upload (multipart) -> returns jobId
+- GET /api/job/{jobId} -> returns status + partial results
+- GET /api/job/{jobId}/download -> returns the generated Markdown file
+
+Implementation details:
+- Use a simple in-memory job store for dev; structure code so it can be swapped for Redis later.
+- Create clear data models: SlideInfo, ExtractedImageInfo, KnowledgeDoc.
+- Write a README with setup steps (python venv, pip install, next install), and include a 'make dev' or scripts.
+
+Project structure:
+- /frontend (Next.js)
+- /backend (FastAPI)
+- root README.md
+
+Also add basic logging and error handling. Keep it runnable locally.
+
+When completely finished, run: clawdbot gateway wake --text "Done: scaffolded ppt-knowledge-doc MVP (Next.js + FastAPI) with PPTX upload, extraction, OCR, and Markdown download" --mode now
